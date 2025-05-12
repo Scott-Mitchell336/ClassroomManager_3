@@ -1,15 +1,15 @@
 const express = require("express");
-const router = express.Router();
+const studentRouter = express.Router();
 const db = require("../db");
 
 // Get all students
-router.get("/student", async (req, res) => {
+studentRouter.get("/student", async (req, res) => {
   const result = await db.query("SELECT * FROM student");
   res.json(result.rows);
 });
 
 // Get a student by id
-router.get("/student/:id", async (req, res, next) => {
+studentRouter.get("/student/:id", async (req, res, next) => {
   const { instructorid } = req.body;
   try {
     const {
@@ -30,7 +30,7 @@ router.get("/student/:id", async (req, res, next) => {
 });
 
 // Create a new student
-router.post("/student", async (req, res) => {
+studentRouter.post("/student", async (req, res) => {
   const { name, cohort, instructorid } = req.body;
   const result = await db.query(
     "INSERT INTO student (name, cohort, instructorid) VALUES ($1, $2, $3) RETURNING *",
@@ -40,7 +40,7 @@ router.post("/student", async (req, res) => {
 });
 
 // Update a student
-router.put("/student/:id", async (req, res, next) => {
+studentRouter.put("/student/:id", async (req, res, next) => {
   // const { instructorid } = req.body;
   try {
     const {
@@ -61,7 +61,7 @@ router.put("/student/:id", async (req, res, next) => {
 });
 
 // Delete a student by id
-router.delete("/student/:id", async (req, res, next) => {
+studentRouter.delete("/student/:id", async (req, res, next) => {
   try {
     const {
       rows: [student],
@@ -80,4 +80,4 @@ router.delete("/student/:id", async (req, res, next) => {
   }
 });
 
-module.exports = router;
+module.exports = studentRouter;
