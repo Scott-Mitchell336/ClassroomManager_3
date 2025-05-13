@@ -19,6 +19,7 @@ authRouter.post("/register", async (req, res, next) => {
 
     res.status(201).send({ token });
   } catch (error) {
+    console.error("Registration error:", error);
     next(error);
   }
 });
