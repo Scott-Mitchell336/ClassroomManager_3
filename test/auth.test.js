@@ -7,7 +7,7 @@ const db = require("../db");
 
 // Add beforeAll to set up test environment
 beforeAll(() => {
-  process.env.JWT = "test-secret-key";
+  process.env.JWT = "shhh";
 });
 
 describe("/auth", () => {
